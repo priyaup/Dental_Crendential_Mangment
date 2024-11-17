@@ -1,0 +1,426 @@
+<header class=" text-white px-3 d-flex justify-content-between align-items-center" style="background-color: #151e59;">
+  <div class="d-flex align-items-center">
+    <div class=" ">
+      <%= image_tag 'logo5.png', alt: 'Logo', class: 'logo'  %>
+    </div>
+    <div class="vertical-line"></div>
+      <h2 class="fw-bold">Dental Credentialing<br> Manager</h2>
+  </div>
+   <div class="d-flex align-items-center">
+    <i class="fas fa-bell fa-xl me-2"></i>
+    <div class="border border-radius bg-white text-dark fw-bold d-flex justify-content-center align-items-center" style="width: 30px; height: 30px; border-radius: 10px;">JD</div>
+   <i class="fa-solid fa-circle-user ms-2 fa-3x custom-icon"></i>
+  </div>
+</header>
+<div class="d-flex vh-100">
+  <nav class="bg-white p-3 sidebar">
+    <div class=" fw-bold">
+      <a href="<%= home_path %>" class=" list-group-item list-group-item-action ">
+        <i class="fa-solid fa-box-open me-3"></i> APPLICATION
+      </a>
+      <a href="<%= locations_path %>" class="list-group-item list-group-item-action active">
+        <i class="fa-solid fa-location-arrow me-3"></i> LOCATIONS
+      </a>
+      <a href="#" class="list-group-item list-group-item-action ">
+        <i class="fa-solid fa-stethoscope me-3 "></i> DOCTORS
+      </a>
+      <a href="#" class="list-group-item list-group-item-action" style="font-size: 15.2px;">
+        <i class="fa-solid fa-truck-ramp-box me-3"style="font-size: 12px;"></i>PAR TRACKING 
+      </a>
+      <a href="#" class="list-group-item list-group-item-action ">
+        <i class="fas fa-question-circle me-3 "></i> HELP / CODES
+      </a>
+      <a href="#" class="list-group-item list-group-item-action ">
+        <i class="fa-solid fa-door-open me-3"></i> LOG OUT
+      </a>
+    </div>
+  </nav>
+  <div class="vertical-line1"></div>
+  <main class="flex-grow-1 p-4">
+    <h3 class="fw-bold">
+      OFFICE PROFILE
+    </h><hr>
+    <h2 class="mt-4 fw-bold">Dental Demonstration Office</h2>
+    <h5 class="mt-4 fw-bold"><%= @location.name %></h5>
+    <p class="para1">Complete the following questions regarding your practice; your data will automatically save as you navigate from section to section. To move to a new section, just click on the title of that section. After completing the final section, click the "Save" link.</p>
+    <div class="row mt-3">
+  <div class="col d-flex flex-wrap gap-2">
+    <%= link_to 'Corporate', edit_corporate_location_path(@location), class: 'btn1 btn-grey' %>
+    <%= link_to 'Technical', edit_technical_location_path(@location), class: 'btn1 btn-grey' %>
+    <%= link_to 'Location Specification', location_specification_location_path(@location), class: 'btn1 btn-grey' %>
+    <%= link_to 'Services', services_location_path(@location), class: 'btn1 btn-grey' %>
+    <%= link_to 'Liability', liability_location_path(@location), class: 'btn1 btn-grey' %>
+    <%= link_to 'Miscellaneous', miscellaneous_location_path(@location), class: 'btn1 btn-blue' %>
+    <%= link_to 'Save', '#', onclick: "saveAndNavigate('#{save_location_path(@location)}')", class: 'btn1 btn-grey' %>
+  </div>
+</div>
+    <div class="border  border-dark mt-5 p-4 mb-5">
+      <div class="row mt-3">
+        <div class="text-end">
+		      <button class="btn1 btn btn-danger" data-bs-toggle="collapse" data-bs-target="#collapsibleFormSection" aria-expanded="false" aria-controls="collapsibleFormSection">
+		        COLLAPSE ALL
+		      </button>
+      </div>
+      <div class="collapse show" id="collapsibleFormSection">
+		    <%= form_with(model: @location, local: true, html: { class: "mt-5 form-border", id: "miscellaneous-form" }) do |form| %>
+		      <div class="mb-3">
+		        <div class="section-header p-3 fw-bold">Location Type</div>
+		        <div class="question-row">
+						  <div class="d-flex justify-content-between align-items-center fw-bold">
+						    <%= form.label :individual_business, "1. INDIVIDUAL BUSINESS?", class: "col-form-label" %>
+						    <div class="radio-group d-flex">
+						      <label class="form-check-label d-flex align-items-center">
+						        <%= form.radio_button :individual_business, true, id: "q1-yes", class: "form-check-input" %>
+						        <span class="ms-1">YES</span>
+						      </label>
+
+						      <label class="form-check-label d-flex align-items-center">
+						        <%= form.radio_button :individual_business, false, id: "q1-no", class: "form-check-input" %>
+						        <span class="ms-1">NO</span>
+						      </label>
+
+						      <label class="form-check-label d-flex align-items-center">
+						        <%= form.radio_button :individual_business, nil, id: "q1-na", class: "form-check-input" %>
+						        <span class="ms-1">N/A</span>
+						      </label>
+						    </div>
+						  </div>
+						</div>
+
+		        </div>
+
+		        <div class="question-row">
+						  <div class="d-flex justify-content-between align-items-center fw-bold">
+						    <%= form.label :group, "2. GROUP?", class: "col-form-label" %>
+						    <div class="radio-group d-flex">
+						      <label class="form-check-label d-flex align-items-center">
+						        <%= form.radio_button :group, true, id: "q2-yes", class: "form-check-input" %>
+						        <span class="ms-1">YES</span>
+						      </label>
+
+						      <label class="form-check-label d-flex align-items-center">
+						        <%= form.radio_button :group, false, id: "q2-no", class: "form-check-input" %>
+						        <span class="ms-1">NO</span>
+						      </label>
+
+						      <label class="form-check-label d-flex align-items-center">
+						        <%= form.radio_button :group, nil, id: "q2-na", class: "form-check-input" %>
+						        <span class="ms-1">N/A</span>
+						      </label>
+						    </div>
+						  </div>
+						</div>
+
+
+		        <!-- Additional form fields continue here -->
+
+		      <div class="section-header p-3 fw-bold">Practice Type</div>
+		        <div class="question-row">
+						  <div class="d-flex justify-content-between align-items-center fw-bold">
+						    <%= form.label :dental_school, "3. DENTAL SCHOOL?", class: "col-form-label" %>
+						    <div class="radio-group d-flex">
+						      <label class="form-check-label d-flex align-items-center">
+						        <%= form.radio_button :dental_school, true, id: "q3-yes", class: "form-check-input" %>
+						        <span class="ms-1">YES</span>
+						      </label>
+
+						      <label class="form-check-label d-flex align-items-center">
+						        <%= form.radio_button :dental_school, false, id: "q3-no", class: "form-check-input" %>
+						        <span class="ms-1">NO</span>
+						      </label>
+
+						      <label class="form-check-label d-flex align-items-center">
+						        <%= form.radio_button :dental_school, nil, id: "q3-na", class: "form-check-input" %>
+						        <span class="ms-1">N/A</span>
+						      </label>
+						    </div>
+						  </div>
+						</div>
+
+
+		        <!-- Add remaining questions here -->
+            <div class="question-row">
+						  <div class="d-flex justify-content-between align-items-center fw-bold">
+						    <%= form.label :clinic, "4. CLINIC?", class: "col-form-label" %>
+						    <div class="radio-group d-flex">
+						      <label class="form-check-label d-flex align-items-center">
+						        <%= form.radio_button :clinic, true, id: "q4-yes", class: "form-check-input" %>
+						        <span class="ms-1">YES</span>
+						      </label>
+
+						      <label class="form-check-label d-flex align-items-center">
+						        <%= form.radio_button :clinic, false, id: "q4-no", class: "form-check-input" %>
+						        <span class="ms-1">NO</span>
+						      </label>
+
+						      <label class="form-check-label d-flex align-items-center">
+						        <%= form.radio_button :clinic, nil, id: "q4-na", class: "form-check-input" %>
+						        <span class="ms-1">N/A</span>
+						      </label>
+						    </div>
+						  </div>
+						</div>
+
+
+			      <div class="question-row">
+						  <div class="d-flex justify-content-between align-items-center fw-bold">
+						    <%= form.label :fqhc, "5. FQHC?", class: "col-form-label" %>
+						    <div class="radio-group d-flex">
+						      <label class="form-check-label d-flex align-items-center">
+						        <%= form.radio_button :fqhc, true, id: "q5-yes", class: "form-check-input" %>
+						        <span class="ms-1">YES</span>
+						      </label>
+
+						      <label class="form-check-label d-flex align-items-center">
+						        <%= form.radio_button :fqhc, false, id: "q5-no", class: "form-check-input", checked: true %>
+						        <span class="ms-1">NO</span>
+						      </label>
+
+						      <label class="form-check-label d-flex align-items-center">
+						        <%= form.radio_button :fqhc, nil, id: "q5-na", class: "form-check-input" %>
+						        <span class="ms-1">N/A</span>
+						      </label>
+						    </div>
+						  </div>
+						</div>
+
+
+			      <div class="question-row">
+			        <div class="d-flex justify-content-between align-items-center fw-bold">
+			          <%= form.label :indian_health_services, "6. INDIAN HEALTH SERVICES (I.H.S)?", class: "col-form-label" %>
+			          <div class="radio-group d-flex">
+			            <label class="form-check-label d-flex align-items-center">
+			              <%= form.radio_button :indian_health_services, true, id: "q6-yes", class: "form-check-input" %>
+			              <span class="ms-1">YES</span>
+			            </label>
+
+			            <label class="form-check-label d-flex align-items-center">
+			              <%= form.radio_button :indian_health_services, false, id: "q6-no", class: "form-check-input" %>
+			              <span class="ms-1">NO</span>
+			            </label>
+
+			            <label class="form-check-label d-flex align-items-center">
+			              <%= form.radio_button :indian_health_services, nil, id: "q6-na", class: "form-check-input" %>
+			              <span class="ms-1">N/A</span>
+			            </label>
+			          </div>
+			        </div>
+			      </div>
+
+
+			    <div class="question-row">
+			      <div class="d-flex justify-content-between align-items-center fw-bold">
+			        <%= form.label :mobile_unit, "7. MOBILE UNIT*", class: "col-form-label" %>
+			        <div class="radio-group d-flex">
+			          <label class="form-check-label d-flex align-items-center">
+			            <%= form.radio_button :mobile_unit, true, id: "q7-yes", class: "form-check-input" %>
+			            <span class="ms-1">YES</span>
+			          </label>
+
+			          <label class="form-check-label d-flex align-items-center">
+			            <%= form.radio_button :mobile_unit, false, id: "q7-no", class: "form-check-input" %>
+			            <span class="ms-1">NO</span>
+			          </label>
+
+			          <label class="form-check-label d-flex align-items-center">
+			            <%= form.radio_button :mobile_unit, nil, id: "q7-na", class: "form-check-input" %>
+			            <span class="ms-1">N/A</span>
+			          </label>
+			        </div>
+			      </div>
+			    </div>
+
+		      </div>
+		    <% end %>
+		  </div>
+		</div>
+  </main> 
+</div>
+<style>
+.logo{
+  height: 20%;
+  width: 175px;
+}  
+.list-group-item {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    color: #6c757d;
+}
+.list-group-item.active {
+    background-color: #11468f;
+    color: white;
+    border-radius: 18px;
+<%#     padding: 20px; %>
+}
+
+
+.custom-icon{
+  font-size: 33px;
+} 
+.search-input {
+  flex-grow: 1;
+  padding: 10px;
+  border: 1px solid #ced4da;
+  border-radius: 5px 0 0 5px;
+  width: 800px;
+}
+
+.search-btn {
+  border: none;
+  background-color: #26408B;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 0 5px 5px 0;
+  font-weight: bold;
+}
+
+.btn1 {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn-blue {
+  background-color: #11468f;
+  color: white;
+  border-radius: 5px !important;
+  padding: 10px 20px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.btn-danger {
+  color: white;
+  margin-left: 10px;
+  background-color: #e8484b;
+  font-weight: bold;
+  border-top-left-radius: 10px !important;
+  border-top-right-radius: 10px !important;
+  border-bottom-right-radius: 10px !important;
+  border-bottom-left-radius: 10px !important;
+}
+
+.btn-grey{
+  background-color: #8d8d8d;
+  color: #eee;
+  text-decoration: none;
+}
+
+.vertical-line {
+  border-left: 2px solid white;
+  height: auto;
+  min-height: 85px;
+  margin: 0 42px;
+}
+.vertical-line1 {
+  border-left: 1px solid #ccc;
+  height: 100%;
+  margin-left: 18px;
+  min-height: 1120px;
+
+}
+
+.para1{
+font-size: 23.5px;
+}
+.para2{
+font-size: 19px;
+}
+.bordered-row {
+border-bottom: 1px solid black; /* Adjust thickness as needed */
+padding-bottom: 10px;
+margin-bottom: 10px;
+width: 100%;
+}
+
+.form-border{
+<%# 	border-bottom: 1px solid black; /* Adjust thickness as needed */ %>
+	border-left: 1px solid black;
+	border-right: 1px solid black;
+}
+.section-header {
+    background-color: #E0E0E0;
+    padding: 8px 15px;
+    font-weight: 500;
+}
+
+.question-row  {
+    padding: 8px 15px;
+    border-bottom: 1px solid black;
+}
+
+.form-check-input {
+    margin-right: 8px;
+}
+
+.collapse-btn {
+    background-color: #E91E63;
+    border: none;
+}
+
+.collapse-btn:hover {
+    background-color: #D81B60;
+}
+
+.radio-group {
+    display: flex;
+    gap: 2rem;
+}
+
+.form-check-input:checked {
+<%#   background-color: #11468f !important; /* Sets the background color of the checked radio button */ %>
+<%#   border-color: #11468f !important;    /* Sets the border color of the checked radio button */ %>
+
+  accent-color: #11468f;
+}
+
+/* Change the color of the radio button when it's focused */
+<%# .form-check-input:focus {
+  box-shadow: 0 0 0 0.2rem rgba(17, 70, 143, 0.25) !important;
+} %>
+
+
+.nav-link {
+    color: #6c757d;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+</style>
+
+<script>
+	
+	function saveAndNavigate(url, isSaveOnly = false) {
+  $.ajax({
+    url: '<%= save_data_location_path(@location) %>',  // Correct PATCH route for saving
+    method: 'PATCH',
+    data: $('#miscellaneous-form').serialize(),  // Serialize data from the Miscellaneous form
+    headers: {
+      'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')  // Ensure CSRF token is included
+    },
+    success: function(response) {
+      if (response.success) {
+        if (!isSaveOnly) {
+          window.location.href = url;  // Redirect if save-only mode is off
+        } else {
+          alert('Data has been saved successfully.');
+        }
+      } else {
+        alert('Data was not saved. Please check for validation errors.');
+      }
+    },
+    error: function(xhr, status, error) {
+      console.error("Error: " + error);
+      alert('There was an error saving the data.');
+    }
+  });
+}
+
+
+
+</script>
+

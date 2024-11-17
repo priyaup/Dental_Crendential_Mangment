@@ -1,0 +1,195 @@
+<header class=" text-white px-3 d-flex justify-content-between align-items-center" style="background-color: #151e59;">
+  <div class="d-flex align-items-center">
+    <div class=" ">
+      <%= image_tag 'logo5.png', alt: 'Logo', class: 'logo'  %>
+    </div>
+    <div class="vertical-line"></div>
+    <div class="">
+      <h2 class="fw-bold">Dental Credentialing<br> Manager</h2>
+    </div>
+  </div>
+  <div class="d-flex align-items-center">
+    <i class="fas fa-bell fa-xl me-2"></i>
+     <div class="border border-radius bg-white text-dark fw-bold d-flex justify-content-center align-items-center" style="width: 30px; height: 30px; border-radius: 10px;">JD</div>
+    <i class="fa-solid fa-circle-user ms-2 fa-3x custom-icon"></i>
+  </div>
+</header>
+<div class="d-flex vh-100">
+  <nav class="bg-white p-3 sidebar">
+    <div class=" fw-bold">
+      <a href="<%= home_path %>" class=" list-group-item list-group-item-action active">
+        <i class="fa-solid fa-box-open me-3"></i> APPLICATION
+      </a>
+      <a href="<%= locations_path %>" class="list-group-item list-group-item-action ">
+        <i class="fa-solid fa-location-arrow me-3 "></i> LOCATIONS
+      </a>
+      <a href="#" class="list-group-item list-group-item-action ">
+        <i class="fa-solid fa-stethoscope me-3 "></i> DOCTORS
+      </a>
+      <a href="#" class="list-group-item list-group-item-action ">
+        <i class="fa-solid fa-truck-ramp-box me-3 "></i> PAR TRACKING
+      </a>
+      <a href="#" class="list-group-item list-group-item-action ">
+        <i class="fas fa-question-circle me-3 "></i> HELP / CODES
+      </a>
+      <a href="#" class="list-group-item list-group-item-action ">
+        <i class="fa-solid fa-door-open me-3"></i> LOG OUT
+      </a>
+    </div>
+  </nav>
+  <div class="vertical-line1"></div> 
+
+  <main class="flex-grow-1 ">
+    <h2 class="p-4">
+      DENTAL DEMONSTRATION OFFICE APPLICATION
+       <i class="fas fa-info-circle"></i>
+    </h2><div class="bordered-row"></div>
+   <div class="input-group my-4 p-4">
+      <%= form_with url: home_path, method: :get, class: "d-flex align-items-center", local: true do %>
+        <%= text_field_tag 'q[name_cont]', params.dig(:q, :name_cont), class: "form-control fw-bold search-input", placeholder: "Type to search..." %>
+        <button class="btn1  search-btn">SEARCH</button>
+      <% end %>
+      <%= link_to "BACK TO FULL LIST", home_path, class: "btn1 btn btn-danger ms-4" %>
+    </div>
+
+    <div class="p-3 fw-bold">
+      <% if @search_results.present? %>
+        <div class="search-results question-row">
+          <% @search_results.each do |result| %>
+            <p><%= result.name %></p>
+          <% end %>
+        </div>
+        <div class="bordered-row"></div> <!-- This will only show when there are results -->
+      <% elsif params[:q] %>
+        <p>No results found</p>
+      <% end %>
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center mt-4 p-4">
+      <span>Page 1 of 1</span>
+       <span class="badge bg-blue">1</span>
+    </div>
+  </main>
+</div>
+<style>
+
+  .bordered-row {
+  width: 100%; /* Full width */
+  height: 1px; /* Thickness of the border */
+  background-color: black; /* Color of the border */
+  margin-top: 10px; /* Space above the border (optional) */
+}
+.list-group-item {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    color: #6c757d;
+}
+.list-group-item.active {
+    background-color: #11468f;
+    color: white;
+    border-radius: 18px;
+<%#     padding: 20px; %>
+}
+.custom-icon{
+  font-size: 33px;
+} 
+.fas.fa-info-circle {
+  color: #7dccfc;
+  padding-top: 15px;
+  border-radius: 50%;
+  font-size: 12px;
+   position: relative;
+  top: -10px;
+}
+.search-bar {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.search-input {
+  border: none;
+  flex-grow: 1;
+  padding: 10px;
+  border-radius: 12px 0 0 12px;
+  width: 55rem;
+  background-color: #f3f3f3;
+  
+}
+
+.search-input::placeholder {
+ color: #b6b6b6;
+  opacity: 1; 
+  font-weight: bold;
+  padding: 20px;
+}
+
+.search-btn {
+  border: none;
+  background-color: #11468f;
+  color: white;
+  padding: 10px 20px;
+  border-top-right-radius: 12px !important;
+  border-bottom-right-radius: 12px !important;
+  font-weight: bold;
+}
+
+
+.btn1 {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold; 
+}
+
+
+.btn-blue {
+    background-color: #11468f;
+    color: white;
+    border-radius: 5px !important; 
+    padding: 10px 20px;
+    font-weight: bold;
+}
+
+
+
+ .btn-danger {
+    color: white;
+    background-color: #e8484b;
+    margin-left: 10px;
+    font-weight: bold; 
+    border-top-left-radius: 10px !important; 
+    border-top-right-radius: 10px !important; 
+    border-bottom-right-radius: 10px !important; 
+    border-bottom-left-radius: 10px !important; 
+}
+
+.vertical-line {
+    border-left: 2px solid white; 
+    height: auto; 
+    min-height: 85px; 
+    margin: 0 42px; 
+}
+.vertical-line1 {
+    border-left: 1px solid #ccc;
+    height: 100%;
+    margin-left: 10px; 
+  }
+
+  .logo{
+  height: 20%;
+  width: 175px;
+} 
+
+.bg-blue{
+  background-color: #151e59;
+  color: white;
+  width: 40px;
+  height: 35px;
+  padding: 10px;
+  font-size: 15px;
+  margin-right: 60px;
+}
+
+</style>

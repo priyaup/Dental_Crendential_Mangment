@@ -1,0 +1,570 @@
+<header class="text-white px-3 d-flex justify-content-between align-items-center" style="background-color: #151e59;">
+  <div class="d-flex align-items-center">
+    <div>
+      <%= image_tag 'logo5.png', alt: 'Logo', class: 'logo' %>
+    </div>
+    <div class="vertical-line"></div>
+    <div>
+      <h2 class="fw-bold">Dental Credentialing<br> Manager</h2>
+    </div>
+  </div>
+  <div class="d-flex align-items-center">
+    <i class="fas fa-bell fa-xl me-2"></i>
+     <div class="border border-radius bg-white text-dark fw-bold d-flex justify-content-center align-items-center" style="width: 30px; height: 30px; border-radius: 10px;">JD</div>
+    <i class="fa-solid fa-circle-user ms-2 fa-3x custom-icon"></i>
+  </div>
+</header>
+
+<div class="d-flex vh-100">
+  <nav class="bg-white p-3 sidebar">
+    <div class=" fw-bold">
+      <a href="<%= home_path %>" class=" list-group-item list-group-item-action ">
+        <i class="fa-solid fa-box-open me-3"></i> APPLICATION
+      </a>
+      <a href="<%= locations_path %>" class="list-group-item list-group-item-action active">
+        <i class="fa-solid fa-location-arrow me-3"></i> LOCATIONS
+      </a>
+      <a href="#" class="list-group-item list-group-item-action ">
+        <i class="fa-solid fa-stethoscope me-3 "></i> DOCTORS
+      </a>
+      <a href="#" class="list-group-item list-group-item-action" style="font-size: 15.2px;">
+        <i class="fa-solid fa-truck-ramp-box me-3"style="font-size: 12px;"></i>PAR TRACKING 
+      </a>
+      <a href="#" class="list-group-item list-group-item-action ">
+        <i class="fas fa-question-circle me-3 "></i> HELP / CODES
+      </a>
+      <a href="#" class="list-group-item list-group-item-action ">
+        <i class="fa-solid fa-door-open me-3"></i> LOG OUT
+      </a>
+    </div>
+  </nav>
+
+  <div class="vertical-line1">
+    <main class="flex-grow-1 p-4">
+      <h3 class="fw-bold">OFFICE PROFILE</h3>
+      <hr>
+      <h2 class="mt-4 fw-bold">Dental Demonstration Office</h2>
+      <h5 class="mt-4 fw-bold"><%= @location.name %></h5>
+      <p class="para1">Complete the following questions regarding your practice your data will automatically save as you navigate from section to section. To move to a new section, just click on the title of that section. After completing the final section, click the "Save" link.</p>
+      
+      <div class="row mt-3">
+        <div class="col d-flex flex-wrap gap-2">
+          <%= link_to 'Corporate', edit_corporate_location_path(@location), class: 'btn1 btn-blue' %>
+          <%= link_to 'Technical', '#', onclick: "saveAndNavigate('#{edit_technical_location_path(@location)}')", class: 'btn1 btn-grey' %>
+          <%= link_to 'Location Specification', location_specification_location_path(@location), class: 'btn1 btn-grey' %>
+          <%= link_to 'Services', services_location_path(@location), class: 'btn1 btn-grey' %>
+          <%= link_to 'Liability', liability_location_path(@location), class: 'btn1 btn-grey' %>
+          <%= link_to 'Miscellaneous', miscellaneous_location_path(@location), class: 'btn1 btn-grey' %>
+          <%= link_to 'Save', save_location_path(@location), class: 'btn1 btn-grey' %>
+        </div>
+      </div>
+
+      <div class="row border border-dark   mt-5 p-4 mb-5">
+        <div class="col-12">
+          <div class="row mt-3">
+            <div class="text-end">
+              <button class="btn1 btn btn-danger" data-bs-toggle="collapse" data-bs-target="#collapsibleFormSection" aria-expanded="false" aria-controls="collapsibleFormSection">
+                COLLAPSE ALL
+              </button>
+            </div>
+          </div>
+          <div class="collapse show" id="collapsibleFormSection">
+            <%= form_with(model: @location, local: true, html: { class: "mt-5 form-border", id: "corporate-form" }) do |form| %>
+              <div class="">
+                <div class="section-header fw-bold">
+                  <p class="mt-3">If this is a non-treating location, scroll down to "Type of Practice". If this is a treating facility, answer the first group of questions below; if not, your doctor will be instructed to answer these questions in their profile.</p>
+                </div>
+
+                <div class="question-row p-3">
+                  <div class="row mt-2">
+                    <div class="col-md-9">
+                      <%= form.label :office_name, '1. OFFICE NAME', class: 'form-label fw-bold me-3' %>
+                    </div>
+                    <div class="col-md-3">
+                      <%= form.text_field :office_name, class: 'form-control rounded-0', id: 'officeName' %>
+                    </div>
+                  </div>
+                </div>
+                 <div class="question-row p-3">
+                  <div class="row">
+                    <div class="col-md-9">
+                      <%= form.label :office_street_address, '2. OFFICE STREET ADDRESS', class: 'form-label fw-bold me-3' %>
+                    </div>
+                    <div class="col-md-3">
+                      <%= form.text_field :office_street_address, class: 'form-control rounded-0', id: 'officeStreetAddress' %>
+                    </div>
+                  </div>
+                </div>
+                 <div class="question-row p-3">
+                  <div class="row">
+                    <div class="col-md-9">
+                      <%= form.label :office_suite_blog, '3. OFFICE SUITE/BLOG', class: 'form-label fw-bold me-3' %>
+                    </div>
+                    <div class="col-md-3">
+                      <%= form.text_field :office_suite_blog, class: 'form-control rounded-0', id: 'officeSuiteBlog' %>
+                    </div>
+                  </div>
+                </div>
+                <div class="question-row p-3">
+                  <div class="row">
+                    <div class="col-md-9">
+                      <%= form.label :office_city, '4. OFFICE CITY', class: 'form-label fw-bold me-3' %>
+                    </div>
+                    <div class="col-md-3">
+                      <%= form.text_field :office_city, class: 'form-control rounded-0', id: 'officeCity' %>
+                    </div>
+                  </div>
+                </div>
+                <div class="question-row p-3">
+                  <div class="row">
+                    <div class="col-md-9">
+                      <%= form.label :office_state, '5. OFFICE STATE', class: 'form-label fw-bold me-3' %>
+                    </div>
+                    <div class="col-md-3">
+                      <%= form.select :office_state, options_for_select(['CONNECTICUT', 'New York', 'California'], @location.office_state),{}, class: 'form-select form-control rounded-0', id: 'officeState' %>
+                    </div>
+                  </div>
+                </div>
+                <div class="question-row p-3">
+                  <div class="row">
+                    <div class="col-md-9">
+                      <%= form.label :zip, '6. OFFICE ZIP', class: 'form-label fw-bold me-3' %>
+                    </div>
+                    <div class="col-md-3">
+                      <%= form.text_field :zip, class: 'form-control rounded-0', id: 'officeZip' %>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="question-row p-3">
+                  <div class="row">
+                    <div class="col-md-9">
+                      <%= form.label :office_country, '7. OFFICE COUNTRY', class: 'form-label fw-bold me-3' %>
+                    </div>
+                    <div class="col-md-3">
+                      <%= form.text_field :office_country, class: 'form-control rounded-0', id: 'officeCounty' %>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="question-row p-3">
+                  <div class="row">
+                    <div class="col-md-9">
+                      <%= form.label :office_telephone, '8. OFFICE TELEPHONE', class: 'form-label fw-bold me-3' %>
+                    </div>
+                    <div class="col-md-3">
+                      <%= form.text_field :office_telephone, class: 'form-control rounded-0', id: 'officeTelephone' %>
+                    </div>
+                  </div>
+                </div>
+
+                 <div class="question-row p-3">
+                  <div class="row">
+                    <div class="col-md-9">
+                      <%= form.label :office_fax, '9. OFFICE FAX', class: 'form-label fw-bold me-3' %>
+                    </div>
+                    <div class="col-md-3">
+                      <%= form.text_field :office_fax, class: 'form-control rounded-0', id: 'officeFax' %>
+                    </div>
+                  </div>
+                </div>
+                <div class="question-row p-3">
+                  <div class="row">
+                    <div class="col-md-9">
+                      <%= form.label :contact_person, '10. OFFICE EMAIL', class: 'form-label fw-bold me-3' %>
+                    </div>
+                    <div class="col-md-3">
+                      <%= form.text_field :contact_person, class: 'form-control rounded-0', id: 'officeEmail' %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="">
+                <div class="section-header fw-bold"><p class=" mt-3">Corporate Office Contact/Credentialing Contact</p></div>
+                <div class="question-row p-3">
+                  <div class="row">
+                    <div class="col-md-9">
+                      <%= form.label :last_name, '11. LAST NAME', class: 'form-label fw-bold me-3' %>
+                    </div>
+                    <div class="col-md-3">
+                      <%= form.text_field :last_name, class: 'form-control rounded-0', id: 'lastname' %>
+                    </div>
+                  </div>
+                </div>
+                <div class="question-row p-3">
+                  <div class="row">
+                    <div class="col-md-9">
+                      <%= form.label :first_name, '12. FIRST NAME', class: 'form-label fw-bold me-3' %>
+                    </div>
+                    <div class="col-md-3">
+                      <%= form.text_field :first_name, class: 'form-control rounded-0', id: 'firstname' %>
+                    </div>
+                  </div>
+                </div>
+                <div class="question-row p-3">
+                  <div class="row">
+                    <div class="col-md-9">
+                      <%= form.label :telephone, '13. TELEPHONE', class: 'form-label fw-bold me-3' %>
+                    </div>
+                    <div class="col-md-3">
+                      <%= form.text_field :telephone, class: 'form-control rounded-0', id: 'telephone' %>
+                    </div>
+                  </div>
+                </div>
+                 <div class="question-row p-3">
+                  <div class="row">
+                    <div class="col-md-9">
+                      <%= form.label :fax, '14. FAX', class: 'form-label fw-bold me-3' %>
+                    </div>
+                    <div class="col-md-3">
+                      <%= form.text_field :fax, class: 'form-control rounded-0', id: 'fax' %>
+                    </div>
+                  </div>
+                </div>
+                <div class="question-row p-3">
+                  <div class="row">
+                    <div class="col-md-9">
+                      <%= form.label :email, '15. EMAIL', class: 'form-label fw-bold me-3' %>
+                    </div>
+                    <div class="col-md-3">
+                      <%= form.text_field :email, class: 'form-control rounded-0', id: 'email' %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="">
+                <div class="section-header fw-bold"><p class="mt-3">Mailing Address if different from office location</p></div>
+                <div class="question-row p-3">
+                  <div class="row">
+                    <div class="col-md-9">
+                      <%= form.label :street_address, '16. STREET ADDRESS', class: 'form-label fw-bold me-3' %>
+                    </div>
+                    <div class="col-md-3">
+                      <%= form.text_field :street_address, class: 'form-control rounded-0', id: 'streetsddress' %>
+                    </div>
+                  </div>
+                </div>
+                <div class="question-row p-3">
+                  <div class="row">
+                    <div class="col-md-9">
+                      <%= form.label :city, '17. CITY', class: 'form-label fw-bold me-3' %>
+                    </div>
+                    <div class="col-md-3">
+                      <%= form.text_field :city, class: 'form-control rounded-0', id: 'city' %>
+                    </div>
+                  </div>
+                </div>
+                <div class="question-row p-3">
+                  <div class="row">
+                    <div class="col-md-9">
+                      <%= form.label :state, '18. OFFICE STATE', class: 'form-label fw-bold me-3' %>
+                    </div>
+                    <div class="col-md-3">
+                      <%= form.text_field :state, class: 'form-control rounded-0', id: 'state' %>
+                    </div>
+                  </div>
+                </div>
+                 <div class="question-row p-3">
+                  <div class="row">
+                    <div class="col-md-9">
+                      <%= form.label :zip, '19. ZIP', class: 'form-label fw-bold me-3' %>
+                    </div>
+                    <div class="col-md-3">
+                      <%= form.text_field :zip, class: 'form-control rounded-0', id: 'zip' %>
+                    </div>
+                  </div>
+                </div>
+                <div class="question-row p-3">
+                  <div class="row">
+                    <div class="col-md-9">
+                      <%= form.label :phone, '20. PHONE', class: 'form-label fw-bold me-3' %>
+                    </div>
+                    <div class="col-md-3">
+                      <%= form.text_field :phone, class: 'form-control rounded-0', id: 'phone' %>
+                    </div>
+                  </div>
+                </div>
+                <div class="question-row p-3">
+                  <div class="row">
+                    <div class="col-md-9">
+                      <%= form.label :fax, '21. FAX', class: 'form-label fw-bold me-3' %>
+                    </div>
+                    <div class="col-md-3">
+                      <%= form.text_field :fax, class: 'form-control rounded-0', id: 'fax' %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="">
+                <div class="section-header fw-bold"><p class="mt-3">Corporate NPI</p></div>
+                  <div class="question-row p-3">
+                    <div class="row">
+                      <div class="col-md-9">
+                        <%= form.label :corporate_npi, '22. CORPORATE NPI*', class: 'form-label fw-bold me-3' %>
+                      </div>
+                      <div class="col-md-3">
+                        <%= form.text_field :corporate_npi, class: 'form-control rounded-0', id: 'corporatenpi' %>
+                        <%= button_tag 'SHOW', type: 'button', class: "btn1 btn-blue mt-4", id: 'toggle-corporate-npi' %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="">
+                  <div class="section-header fw-bold"><p class="mt-3">Tax Payer Information</p></div>
+                  <div class="question-row p-3">
+                    <div class="row">
+                      <div class="col-md-9">
+                        <%= form.label :group_corporate_name_as_it_appears_on_w9, '23.GROUP/CORPORATE NAME AS IT APPEARS ON W9', class: 'form-label fw-bold me-3' %>
+                      </div>
+                      <div class="col-md-3">
+                        <%= form.text_field :group_corporate_name_as_it_appears_on_w9, class: 'form-control rounded-0', id: 'group_corporate_name_as_it_appears_on_w9' %>
+                      </div>
+
+                    </div>
+                  </div>
+                  <div class="question-row p-3">
+                    <div class="row">
+                      <div class="col-md-9">
+                        <%= form.label :group_tax_id, '24. GROUP TAX ID*', class: 'form-label fw-bold me-3' %>
+                      </div>
+                      <div class="col-md-3">
+                        <%= form.text_field :group_tax_id, class: 'form-control rounded-0', id: 'grouptaxid' %>
+                        <%= button_tag 'SHOW', type: 'button', class: "btn1 btn-blue mt-4", id: 'toggle-group-tax-id' %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <div class="section-header fw-bold"><p class="mt-3">Office Info</p></div>
+                  <div class="question-row p-3">
+                    <div class="row">
+                      <div class="col-md-9">
+                        <%= form.label :office_email_address, '25. OFFICE MAIL ADDRESS', class: 'form-label fw-bold me-3' %>
+                      </div>
+                      <div class="col-md-3">
+                        <%= form.text_field :office_email_address, class: 'form-control rounded-0', id: 'Officemail' %>
+                      </div>
+
+                    </div>
+                  </div>
+                  <div class="question-row p-3">
+                    <div class="row">
+                      <div class="col-md-9">
+                        <%= form.label :web_address, '26. WEB ADDRESS', class: 'form-label fw-bold me-3' %>
+                      </div>
+                      <div class="col-md-3">
+                        <%= form.text_field :web_address, class: 'form-control rounded-0', id: 'webaddress' %>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+             <%# <div class="text-end mt-4">
+                <%= form.submit 'Submit', class: 'btn btn-primary' %>
+              <%# </div> %>  
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+ 
+ <style>
+  .logo{
+  height: 20%;
+  width: 175px;
+}  
+.list-group-item {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    color: #6c757d;
+}
+.list-group-item.active {
+    background-color: #11468f;
+    color: white;
+    border-radius: 18px;
+<%#     padding: 20px; %>
+}
+
+.custom-icon{
+  font-size: 33px;
+} 
+
+
+.btn1 {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn-blue {
+  background-color: #11468f;
+  color: white;
+  border-radius: 8px !important;
+  padding: 6px 10px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+
+
+.btn-danger {
+  color: white;
+  background-color: #e8484b;
+  margin-left: 10px;
+  font-weight: bold;
+  border-top-left-radius: 10px !important;
+  border-top-right-radius: 10px !important;
+  border-bottom-right-radius: 10px !important;
+  border-bottom-left-radius: 10px !important;
+}
+
+.btn-grey{
+  background-color: #8d8d8d;
+  color: #eee;
+  text-decoration: none;
+}
+.vertical-line {
+  border-left: 2px solid white;
+  height: auto;
+  min-height: 85px;
+  margin: 0 42px;
+
+}
+.vertical-line1 {
+  border-left: 1px solid #ccc;
+  margin-left: 18px;
+  min-height: 2980px;
+}
+  .para1{
+    font-size: 23.5px;
+  }
+  .para2{
+    font-size: 19px;
+  }
+  .bordered-row {
+    border-bottom: 1px solid black; /* Adjust thickness as needed */
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+  }
+
+.section-header {
+  background-color: #E0E0E0;
+  padding: 8px 15px;
+  font-weight: 500;
+}
+
+.question-row  {
+    padding: 8px 15px;
+    border-bottom: 1px solid black;
+}
+
+.form-border{
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+}
+
+.form-check-input {
+    margin-right: 8px;
+}
+
+.collapse-btn {
+    background-color: #E91E63;
+    border: none;
+}
+
+.collapse-btn:hover {
+    background-color: #D81B60;
+}
+
+.radio-group {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-link {
+    color: #6c757d;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.form-control{
+  border:  1px solid black;
+}
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    function toggleFieldContent(fieldId, buttonId) {
+      const field = document.getElementById(fieldId);
+      const button = document.getElementById(buttonId);
+
+      button.addEventListener("click", function() {
+        if (field.value) {
+          field.dataset.originalValue = field.value;  // Save the original content
+          field.value = ''; // Clear the content
+          button.textContent = "SHOW";
+        } else {
+          field.value = field.dataset.originalValue || ''; // Restore the content
+          button.textContent = "HIDE";
+        }
+      });
+    }
+
+    // Apply toggle functionality to both fields
+    toggleFieldContent("corporatenpi", "toggle-corporate-npi");
+    toggleFieldContent("grouptaxid", "toggle-group-tax-id");
+  });
+
+  <%# // Save data to sessionStorage on form input change
+document.addEventListener("DOMContentLoaded", function() {
+  const formElements = document.querySelectorAll('#collapsibleFormSection input, #collapsibleFormSection select'); // Select all inputs and selects
+
+  formElements.forEach(element => {
+    // Check if there's already data in sessionStorage and prefill the form fields
+    if (sessionStorage.getItem(element.id)) {
+      element.value = sessionStorage.getItem(element.id);
+    }
+
+    // Store data in sessionStorage when input changes
+    element.addEventListener('input', function() {
+      sessionStorage.setItem(element.id, element.value);
+    });
+  });
+}); %>
+
+
+function saveAndNavigate(url) {
+  event.preventDefault(); // Prevent default link behavior
+
+  $.ajax({
+    url: '<%= save_data_location_path(@location) %>', // Ensure this points to the correct path
+    method: 'PATCH',
+    data: $('#corporate-form').serialize(),
+    headers: {
+      'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+    },
+    success: function(response) {
+      if (response.success) {
+        window.location.href = url;
+      } else {
+        alert("Error saving data: " + response.errors.join(", "));
+      }
+    },
+    error: function(xhr, status, error) {
+      console.error("Error: " + error);
+      alert('There was an error saving the data.');
+    }
+  });
+}
+
+
+
+</script>

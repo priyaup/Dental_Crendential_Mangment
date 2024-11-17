@@ -1,0 +1,250 @@
+<header class=" text-white px-3 d-flex justify-content-between align-items-center" style="background-color: #151e59;">
+  <div class="d-flex align-items-center">
+    <div class=" ">
+      <%= image_tag 'logo5.png', alt: 'Logo', class: 'logo'  %>
+    </div>
+    <div class="vertical-line"></div>
+    <div class="">
+      <h2 class="fw-bold">Dental Credentialing<br> Manager</h2>
+    </div>
+  </div>
+   <div class="d-flex align-items-center">
+    <i class="fas fa-bell fa-xl me-2"></i>
+    <div class="border border-radius bg-white text-dark fw-bold d-flex justify-content-center align-items-center" style="width: 30px; height: 30px; border-radius: 10px;">JD</div>
+   <i class="fa-solid fa-circle-user ms-2 fa-3x custom-icon"></i>
+  </div>
+</header>
+<div class="d-flex vh-100">
+  <nav class="bg-white p-3 sidebar">
+    <div class=" fw-bold">
+      <a href="<%= home_path %>" class=" list-group-item list-group-item-action ">
+        <i class="fa-solid fa-box-open me-3"></i> APPLICATION
+      </a>
+      <a href="<%= locations_path %>" class="list-group-item list-group-item-action active">
+        <i class="fa-solid fa-location-arrow me-3"></i> LOCATIONS
+      </a>
+      <a href="#" class="list-group-item list-group-item-action ">
+        <i class="fa-solid fa-stethoscope me-3 "></i> DOCTORS
+      </a>
+      <a href="#" class="list-group-item list-group-item-action" style="font-size: 15.2px;">
+        <i class="fa-solid fa-truck-ramp-box me-3"style="font-size: 12px;"></i>PAR TRACKING 
+      </a>
+      <a href="#" class="list-group-item list-group-item-action ">
+        <i class="fas fa-question-circle me-3 "></i> HELP / CODES
+      </a>
+      <a href="#" class="list-group-item list-group-item-action ">
+        <i class="fa-solid fa-door-open me-3"></i> LOG OUT
+      </a>
+    </div>
+  </nav> 
+  <div class="vertical-line1"></div>
+  <main class="flex-grow-1 p-4">
+    <h3 class="fw-bold">
+      OFFICE PROFILE
+    </h3><hr>
+   <h2 class="mt-4 fw-bold">Dental Demonstration Office</h2>
+    <h5 class="mt-4 fw-bold"><%= @location.name %></h5>
+    <p class="para1">Complete the following questions regarding your practice; your data will automatically save as you navigate from section to section. To move to a new section, just click on the title of that section. After completing the final section, click the "Save" link.</p>
+    <div class="row mt-3">
+      <div class="col d-flex flex-wrap gap-2">
+        <%= link_to 'Corporate', edit_corporate_location_path(@location), class: 'btn1 btn-grey' %>
+        <%= link_to 'Technical', edit_technical_location_path(@location), class: 'btn1 btn-grey' %>
+        <%= link_to 'Location Specification', location_specification_location_path(@location), class: 'btn1 btn-grey' %>
+        <%= link_to 'Services', services_location_path(@location), class: 'btn1 btn-grey' %>
+        <%= link_to 'Liability', liability_location_path(@location), class: 'btn1 btn-grey' %>
+        <%= link_to 'Miscellaneous', miscellaneous_location_path(@location), class: 'btn1 btn-grey' %>
+        <%= link_to 'Save', save_location_path(@location), class: 'btn1 btn-blue' %>
+      </div>
+    </div>
+    <div class="border  border-dark mt-5 p-4 mb-5" style="height:35%;">
+      <div class="row">
+			  <div class="text-end">
+			    <button class="btn1 btn btn-danger" data-bs-toggle="collapse" data-bs-target="#collapsibleSection" aria-expanded="false" aria-controls="collapsibleSection">
+			      COLLAPSE ALL
+			    </button>
+			  </div>
+			</div>
+			<!-- Collapsible Section Starts Here -->
+			<div class="collapse show" id="collapsibleSection">
+				<p class="fw-bold mt-5">Your location profile is now complete. You can return to add additional location or begin to add your doctors</p>
+
+			  <div class="row mt-2">
+			    <div class="col d-flex flex-wrap gap-2">
+			      <!-- Button to navigate to the new location page -->
+			      <%= link_to 'CLICK HERE TO ADD LOCATION', new_location_path, class: 'btn btn1 btn-blue1' %>
+
+			      <!-- Button to add a doctor (does nothing) -->
+			      <%= button_to 'CLICK HERE TO ADD DOCTOR', '#', class: 'btn btn1 btn-blue1', method: :post %>
+
+			      <!-- Button to save and redirect to the locations index page -->
+			     <%= form_with(model: @location, url: location_path(@location), method: :patch) do |form| %>
+						  <%= form.submit 'SAVE AND CLOSE', name: 'commit', class: 'btn btn1 btn-blue1' %>
+						<% end %>
+			    </div>
+			  </div>
+			</div>
+    </div>
+  </main>
+</div>
+<style>
+  .logo{
+  height: 20%;
+  width: 175px;
+}  
+.list-group-item {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    color: #6c757d;
+}
+.list-group-item.active {
+    background-color: #11468f;
+    color: white;
+    border-radius: 18px;
+<%#     padding: 20px; %>
+}
+
+
+.custom-icon{
+  font-size: 33px;
+} 
+
+.btn1 {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn-blue {
+  background-color: #11468f;
+  color: white;
+  border-radius: 10px !important;
+  padding: 10px 20px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.btn-blue1 {
+  background-color: #11468f;
+  color: white;
+  border-radius: 10px !important;
+  padding: 8px 25px;
+  text-decoration: none;
+}
+
+.btn-danger {
+  color: white;
+  margin-left: 10px;
+  font-weight: bold;
+  border-top-left-radius: 10px !important;
+  border-top-right-radius: 10px !important;
+  border-bottom-right-radius: 10px !important;
+  border-bottom-left-radius: 10px !important;
+}
+
+.btn-grey{
+  background-color: #8d8d8d;
+  color: #eee;
+  text-decoration: none;
+}
+.vertical-line {
+  border-left: 2px solid white;
+  height: auto;
+  min-height: 85px;
+  margin: 0 42px;
+}
+.vertical-line1 {
+  border-left: 1px solid #ccc;
+  height: 100% !important;
+  margin-left: 18px;
+  min-height: 1390px;
+}
+.para1{
+  font-size: 23.5px;
+}
+.para2{
+  font-size: 19px;
+}
+.bordered-row {
+  border-bottom: 1px solid black; /* Adjust thickness as needed */
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+}
+.section-header {
+  background-color: #E0E0E0;
+  padding: 8px 15px;
+  font-weight: 500;
+}
+
+.question-row  {
+    padding: 8px 15px;
+    border-bottom: 1px solid black;
+}
+
+.form-check-input {
+    margin-right: 8px;
+}
+
+.collapse-btn {
+    background-color: #E91E63;
+    border: none;
+}
+
+.collapse-btn:hover {
+    background-color: #D81B60;
+}
+
+.radio-group {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-link {
+    color: #6c757d;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+</style>
+
+<script>
+	
+	document.addEventListener("DOMContentLoaded", function () {
+  const saveButton = document.querySelector(".btn-blue1");
+  if (!saveButton) return; // Exit if the Save and Close button is not found.
+
+  saveButton.addEventListener("click", function (event) {
+    event.preventDefault();
+
+    // Collect all form data
+    const allData = {};
+    document.querySelectorAll("form").forEach((form) => {
+      const formData = new FormData(form);
+      for (const [key, value] of formData.entries()) {
+        allData[key] = value;
+      }
+    });
+
+    // Replace `locationId` with the actual location ID
+    const locationId = document.querySelector("form").dataset.locationId;
+
+    fetch(`/locations/${locationId}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ location: allData }),
+    })
+      .then((response) => {
+        if (response.ok) {
+          window.location.href = "/locations"; // Redirect to index page
+        } else {
+          alert("Failed to save data. Please check for errors.");
+        }
+      })
+      .catch((error) => console.error("Error saving data:", error));
+  });
+});
+
+</script>
